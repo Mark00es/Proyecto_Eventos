@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Evento</title>
+    <!-- Enlace a la API de Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places"></script>
+    <!-- Enlace a Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="./assets/logo.avif">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Cambia el color de fondo del cuerpo */
+        }
+        .container-custom {
+            margin-top: 40px;
+        }
+        .event-card {
+            background-color: #0593eb7a; /* Fondo azul */
+            color: #fff; /* Texto blanco */
+            padding: 20px;
+            border-radius: 20px; /* Borde redondeado */
+        }
+        .event-card .row {
+            justify-content: center;
+        }
+        .event-card .event-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .event-card .event-details {
+            flex-grow: 1;
+            padding: 20px; /* Agregamos espacio interno al card */
+        }
+        .event-card #mapaUbicacion {
+            height: 300px;
+            width: 100%;
+            border-radius: 20px; /* Borde redondeado para el mapa */
+        }
+        .back-button {
+            text-align: right;
+        }
+        .back-button a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-custom">
+        <div class="back-button">
+            <a href="#" onclick="history.back();">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="event-card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="event-image">
+                                <img src="" alt="Evento" id="eventoImagen">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="event-details">
+                                <h2 id="eventoNombre">Nombre del Evento</h2>
+                                <p><strong>Precio:</strong> <span id="eventoPrecio">Precio</span> <span> Bs</span></p>
+                                <p><strong>Fecha:</strong> <span id="eventoFecha">Fecha</span></p>
+                                <p><strong>Zona:</strong> <span id="eventoZona">Zona</span></p>
+                                <button class="btn btn-primary" id="reservarBtn">Reservar</button>
+                                <p id="mensajeReserva" style="display: none; color: green;">Evento guardado</p>                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Ubicación</h3>
+                            <!-- Mapa de Google Maps aquí -->
+                            <div id="mapaUbicacion"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Función para obtener los parámetros de consulta (query parameters)
+            function obtenerParametroQuery(nombre) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(nombre);
+            }
+
+            // Obtener los valores de los parámetros de consulta
+            const imagenEvento = obtenerParametroQuery('imagen');
+            const nombreEvento = obtenerParametroQuery('nombre');
+            const precioEvento = obtenerParametroQuery('precio');
+            const fechaEvento = obtenerParametroQuery('fecha');
+            const zonaEvento = obtenerParametroQuery('zona');
+
+            // Actualizar los elementos HTML con los valores obtenidos
+            $('#eventoImagen').attr('src', imagenEvento);
+            $('#eventoNombre').text(nombreEvento);
+            $('#eventoPrecio').text(precioEvento);
+            $('#eventoFecha').text(fechaEvento);
+            $('#eventoZona').text(zonaEvento);
+        });
+    </script>
+    <script>
+        // Reemplazar con los datos reales del evento
+        const TU_API_KEY = 'TU_API_KEY';
+        const TU_LATITUD = -17.372021;
+        const TU_LONGITUD = -66.1445619;
+
+        // Función para inicializar el mapa
+        function initMap() {
+            const ubicacionEvento = { lat: TU_LATITUD, lng: TU_LONGITUD };
+            const mapa = new google.maps.Map(document.getElementById('mapaUbicacion'), {
+                center: ubicacionEvento,
+                zoom: 14, // Puedes ajustar el nivel de zoom según tu preferencia
+            });
+            const marcador = new google.maps.Marker({
+                position: ubicacionEvento,
+                map: mapa,
+                title: 'Ubicación del Evento',
+            });
+        }
+    </script>
+    <script>
+         $('#reservarBtn').click(function() {
+            $('#mensajeReserva').show();
+        });
+        // Cargar el mapa cuando se cargue la página
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+</body>
+</html>

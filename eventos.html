@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="stylesHome.css"> <!-- Archivo CSS personalizado -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">        
+    <link rel="icon" href="./assets/logo.avif">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html" style="font-family: 'Poppins', sans-serif; color: white;"><img src="./assets/logo.avif" alt="" width="50px" height="50px" style="margin-left: 3rem;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="eventos.html">Eventos</a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="guia.html">Guia</a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="nosotros.html">Nosotros</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">            
+                <li class="nav-item">
+                    <button class="btn btn-link" id="darkModeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Filtros y barra de búsqueda -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="startDate">Filtrar por fecha (Desde):</label>
+                    <input type="date" id="startDate" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="endDate">Filtrar por fecha (Hasta):</label>
+                    <input type="date" id="endDate" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="typeFilter">Filtrar por tipo:</label>
+                    <select id="typeFilter" class="form-control">
+                        <option value="">Mostrar Todo</option>
+                        <option value="concierto">Concierto</option>
+                        <option value="conferencia">Conferencia</option>
+                        <option value="deporte">Deporte</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="zoneFilter">Filtrar por Zona:</label>
+                    <select id="zoneFilter" class="form-control">
+                        <option value="">Mostrar Todo</option>
+                        <option value="centro">Centro</option>
+                        <option value="norte">Norte</option>
+                        <option value="sud">Sud</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="priceFilter">Filtrar por Precio (Menor a):</label>
+                    <input type="number" id="priceFilter" class="form-control">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Lista de eventos (aquí se cargarán los eventos) -->
+    <div class="event-list">
+        <main class="col-md-12">
+            <div class="container">
+                <div class="row mt-4 mb-4">
+                    <div class="col-md-4 mb-3" data-date="2023-09-10" data-type="concierto" data-zone="centro" data-price="30">
+                        <div class="card navbar">
+                            <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30">
+                                <img src="./assets/img1.jpg" class="card-img card-img-custom" alt="Evento 1">
+                                <div class="hover-text">Evento de Salon</div>
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text">Fecha: 2023-09-10</p>
+                                <p class="card-text">Zona: Centro</p>
+                                <p class="card-text">Precio: 30 Bs</p>
+                                <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30" class="btn btn-primary">Información</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3" data-date="2023-09-10" data-type="concierto" data-zone="centro" data-price="30">
+                        <div class="card navbar">
+                            <a href="card.html?evento=2&imagen=./assets/img2.jpg&fecha=2023-09-10&zona=Centro&precio=20">
+                                <img src="./assets/img2.jpg" class="card-img card-img-custom" alt="Evento 1">
+                                <div class="hover-text">Evento de Salon</div>
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text">Fecha: 2023-09-10</p>
+                                <p class="card-text">Zona: Centro</p>
+                                <p class="card-text">Precio: 30 Bs</p>
+                                <a href="card.html?evento=2&imagen=./assets/img2.jpg&fecha=2023-09-10&zona=Centro&precio=20" class="btn btn-primary">Información</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3" data-date="2023-09-10" data-type="concierto" data-zone="centro" data-price="30">
+                        <div class="card navbar">
+                            <a href="card.html?evento=1&imagen=./assets/img3.jpg&fecha=2023-09-10&zona=Centro&precio=30">
+                                <img src="./assets/img1.jpg" class="card-img card-img-custom" alt="Evento 1">
+                                <div class="hover-text">Evento de Salon</div>
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text">Fecha: 2023-09-10</p>
+                                <p class="card-text">Zona: Centro</p>
+                                <p class="card-text">Precio: 30 Bs</p>
+                                <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30" class="btn btn-primary">Información</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3" data-date="2023-09-10" data-type="concierto" data-zone="centro" data-price="30">
+                        <div class="card navbar">
+                            <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30">
+                                <img src="./assets/img1.jpg" class="card-img card-img-custom" alt="Evento 1">
+                                <div class="hover-text">Evento de Salon</div>
+                            </a>
+                            <div class="card-body">
+                                <p class="card-text">Fecha: 2023-09-10</p>
+                                <p class="card-text">Zona: Centro</p>
+                                <p class="card-text">Precio: 30 Bs</p>
+                                <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30" class="btn btn-primary">Información</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Agrega más eventos aquí -->
+                </div>
+            </div>
+            <!-- Agregar una paginación -->
+            <ul class="pagination justify-content-center">
+                <!-- ... (pagination items) ... -->
+            </ul>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>    
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+    // Función para aplicar filtros
+    function applyFilters() {
+        const startDate = $("#startDate").val();
+        const endDate = $("#endDate").val();
+        const typeFilter = $("#typeFilter").val();
+        const zoneFilter = $("#zoneFilter").val();
+        const priceFilter = parseInt($("#priceFilter").val()); // Obtener el precio como número entero
+
+
+        $(".event-list .col-md-4").each(function() {
+            const eventStartDate = $(this).data("date");
+            const eventType = $(this).data("type");
+            const eventZone = $(this).data("zone");
+            const eventPrice = parseInt($(this).data("price")); // Obtener el precio como número entero
+
+
+            // Ocultar o mostrar eventos según los filtros
+            if (
+                (startDate === "" || eventStartDate >= startDate) &&
+                (endDate === "" || eventStartDate <= endDate) &&
+                (typeFilter === "" || eventType === typeFilter) &&
+                (zoneFilter === "" || eventZone === zoneFilter) &&
+                (isNaN(priceFilter) || eventPrice <= priceFilter) // Aplicar filtro de precio
+            ) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Llama a applyFilters cuando cambian los filtros
+    $("#startDate, #endDate, #typeFilter, #zoneFilter, #priceFilter").change(applyFilters);
+
+    // Inicialmente, muestra todos los eventos
+    applyFilters();
+    });
+    </script>
+    <script>
+        // Función para guardar los datos del evento en localStorage
+        function guardarEvento(eventoId) {
+            // Reemplaza con los datos específicos de cada evento
+            const eventoData = {
+                imagen: "./assets/img1.jpg",
+                fecha: "2023-09-10",
+                zona: "Centro"
+            };
+
+            localStorage.setItem(`evento_${eventoId}`, JSON.stringify(eventoData));
+        }
+
+        // Función de ejemplo para agregar al carrito (puedes personalizarla)
+        function agregarAlCarrito() {
+            alert("Evento agregado al carrito");
+        }
+    </script>   
+    
+</body>
+</html>

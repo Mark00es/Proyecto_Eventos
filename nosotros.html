@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros</title>
+    <!-- Agregar el enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="stylesHome.css"> <!-- Archivo CSS personalizado -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">    
+    <link rel="icon" href="./assets/logo.avif">
+</head>
+<body>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html" style="font-family: 'Poppins', sans-serif; color: white;"><img src="./assets/logo.avif" alt="" width="50px" height="50px" style="margin-left: 3rem;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="eventos.html">Eventos</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="guia.html">Guia</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">            
+            <li class="nav-item">
+                <button class="btn btn-link" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+ <!-- Sección "Empresa" -->
+    <section class="container mt-5">
+        <h2>Nuestra Empresa</h2>
+        <p>Somos una empresa comprometida con la calidad y la excelencia en nuestros servicios. Fundada en [año], hemos estado proporcionando soluciones a nuestros clientes durante años.</p>
+        <p>Nuestro equipo de profesionales altamente calificados se dedica a [descripción de actividades de la empresa].</p>
+    </section>    
+    <div class="container">
+        <h1 class="mt-5">Contacto</h1>
+        <p>Por favor, completa el siguiente formulario para ponerte en contacto con nosotros:</p>
+
+        <form action="procesar_formulario.php" method="post">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Sección "Redes Sociales" -->
+    <section class="container mt-5">
+        <h2>Síguenos en Redes Sociales</h2>
+        <ul>
+            <li><a href="https://www.facebook.com/tuempresa" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/tuempresa" target="_blank">Twitter</a></li>
+            <li><a href="https://www.instagram.com/tuempresa" target="_blank">Instagram</a></li>
+            <!-- Agrega más enlaces a tus redes sociales -->
+        </ul>
+    </section>
+
+    <!-- Pie de página (si lo deseas) -->
+    <footer class="container mt-5">
+        <p>Derechos de autor © 2023. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>    
+    <script src="script.js"></script>
+
+</body>
+</html>

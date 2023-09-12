@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía</title>
+    <!-- Agregar el enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="./stylesHome.css"> <!-- Agrega tus estilos personalizados si es necesario -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="./assets/logo.avif">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html" style="font-family: 'Poppins', sans-serif; color: white;"><img src="./assets/logo.avif" alt="" width="50px" height="50px" style="margin-left: 3rem;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="eventos.html">Eventos</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="guia.html">Guia</a>
+            </li>
+            <li class="nav-item mx-5">
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">            
+            <li class="nav-item">
+                <button class="btn btn-link" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Guía de Reserva de Eventos en Línea</h1>
+
+    <section id="preguntas-frecuentes">
+        <h2>Preguntas Frecuentes</h2>
+
+        <div class="accordion" id="faq-accordion">
+
+            <!-- Pregunta 1 -->
+            <div class="card">
+                <div class="card-header" id="pregunta1">
+                    <h3 class="mb-0">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#respuesta1" aria-expanded="true" aria-controls="respuesta1">
+                            ¿Cómo puedo reservar un evento en línea?
+                        </button>
+                    </h3>
+                </div>
+
+                <div id="respuesta1" class="collapse" aria-labelledby="pregunta1" data-parent="#faq-accordion">
+                    <div class="card-body navbar">
+                        Para reservar un evento en línea, sigue estos pasos:
+                        <ol>
+                            <li>Ingresa a nuestro sitio web.</li>
+                            <li>Busca el evento que deseas reservar.</li>
+                            <li>Haz clic en el botón de "Reservar" o "Comprar boletos".</li>
+                            <li>Selecciona la cantidad de boletos que deseas comprar.</li>
+                            <li>Proporciona la información necesaria, como nombre y correo electrónico.</li>
+                            <li>Realiza el pago, si es necesario.</li>
+                            <li>Recibirás una confirmación de tu reserva por correo electrónico.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="card">
+                <div class="card-header" id="pregunta2">
+                    <h3 class="mb-0">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#respuesta2" aria-expanded="false" aria-controls="respuesta2">
+                            ¿Cuál es el proceso de pago?
+                        </button>
+                    </h3>
+                </div>
+
+                <div id="respuesta2" class="collapse" aria-labelledby="pregunta2" data-parent="#faq-accordion">
+                    <div class="card-body navbar">
+                        El proceso de pago puede variar según el evento y la plataforma de reserva. Por lo general, se realiza de la siguiente manera:
+                        <ol>
+                            <li>Después de seleccionar la cantidad de boletos, serás dirigido a una página de pago.</li>
+                            <li>Ingresa la información de tu tarjeta de crédito o débito.</li>
+                            <li>Revisa los detalles de tu compra y confirma el pago.</li>
+                            <li>Recibirás una confirmación de pago y reserva por correo electrónico.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="card">
+                <div class="card-header" id="pregunta3">
+                    <h3 class="mb-0">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#respuesta3" aria-expanded="false" aria-controls="respuesta3">
+                            ¿Puedo cancelar o modificar mi reserva?
+                        </button>
+                    </h3>
+                </div>
+
+                <div id="respuesta3" class="collapse" aria-labelledby="pregunta3" data-parent="#faq-accordion">
+                    <div class="card-body navbar">
+                        La política de cancelación y modificación puede variar según el evento y el organizador. Te recomendamos revisar los términos y condiciones al realizar la reserva. Si deseas cancelar o modificar tu reserva, comunícate con el equipo de soporte del evento para obtener ayuda.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<!-- Agregar las referencias a Bootstrap y jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

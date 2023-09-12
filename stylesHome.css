@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;        
+}
+.nav-link{
+    color: white;
+}
+.nav-link:hover{
+    color: blue;    
+    scale: 1.5;
+}
+.navbar {
+    background: linear-gradient(45deg, #0593eb, #8dc8ec);
+    background-size: 200% 100%;
+    animation: gradientAnimation 7s linear infinite alternate;
+}
+
+/* Estilo para la barra de navegación en modo oscuro */
+
+.navbar.dark-mode #darkModeToggle {
+    color: white;
+}
+/* Animación para el fondo en modo oscuro */
+@keyframes darkGradientAnimation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Estilo para la barra de navegación en modo oscuro */
+.navbar.dark-mode {
+    background: linear-gradient(45deg, #000000, #00008B);
+    background-size: 200% 100%;
+    animation: darkGradientAnimation 7s linear infinite alternate;
+}
+
+#darkModeToggle {
+    color: white; /* Color blanco predeterminado */
+    transition: color 0.3s ease-in-out;
+}
+
+#darkModeToggle:hover {
+    color: rgb(5, 5, 119); /* Cambia el color a azul en hover */
+}
+
+/* Estilo de la luna completa (font-awesome) */
+#darkModeToggle.complete {
+    content: "\f186"; /* Icono de luna completa de Font Awesome */
+    color: rgb(5, 5, 119); /* Cambia el color a azul cuando está completa */
+}
+.dark-card-bg {
+    background-color: #000; /* Color de fondo en modo oscuro */
+    color: #fff; /* Color del texto en modo oscuro */
+}
+/* Agrega este estilo para cambiar el color del icono de sol a amarillo en hover */
+#darkModeToggle.complete:hover {
+    color: yellow; /* Cambia el color a amarillo en hover */
+}
+/* Keyframes para la animación */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+
+
+
+.filters {
+    margin: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.event-list {
+    margin: 20px;
+}
+
+.card {
+    position: relative;
+    color: #fff; /* Color del texto */
+}
+
+/* Estilo para el texto sobre la imagen */
+.card .hover-text {
+    position: absolute;
+    top: 25%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    color: #fff; /* Color del texto */
+    padding: 10px;
+    border-radius: 5px;    
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.3s ease;
+}
+
+/* Mostrar el texto al hacer hover en el card */
+.card:hover .hover-text {
+    opacity: 1; /* Mostrar el texto al hacer hover */    
+}
+.card .btn-primary:hover {
+    background-color: #040e9b; /* Cambia el color al hacer hover */
+}
+
+/* Estilo para agrandar la imagen al hacer hover */
+.card .card-img-top:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al hacer hover */
+    transition: transform 0.3s ease; /* Agrega una transición suave */    
+}
+.card-img-custom {
+    width: 100%; /* Establece el ancho al 100% del contenedor padre */
+    height: 250px; /* Establece la altura automática para mantener la proporción original */
+    max-height: 200px; /* Establece una altura máxima si es necesario */
+}
