@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Evento</title>
+    <!-- Asegúrate de reemplazar 'TU_API_KEY' con tu clave de API de Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places" async defer></script>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesHome.css">
+    <!-- Archivo CSS personalizado -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">    
+    <link rel="icon" href="./assets/logo.avif">    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <script>
+        function initMap() {
+            const userLat = -17.383478628725154; // Latitud deseada
+            const userLng = -66.157662107377;   // Longitud deseada
+
+            const ubicacionEvento = { lat: userLat, lng: userLng };
+            const mapa = new google.maps.Map(document.getElementById('mapaUbicacion'), {
+                center: ubicacionEvento,
+                zoom: 14, // Puedes ajustar el nivel de zoom según tu preferencia
+            });
+            const marcador = new google.maps.Marker({
+                position: ubicacionEvento,
+                map: mapa,
+                title: 'Ubicación Específica',
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand"
+            href="index.html"
+            style="font-family: 'Poppins', sans-serif; color: white;">
+            <img src="./assets/logo.avif"
+                alt
+                width="50px"
+                height="50px"
+                style="margin-left: 3rem;">
+        </a>
+        <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between"
+            id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item mx-5">
+                    <a class="nav-link"
+                        href="eventos.html">
+                        Encuentra Eventos
+                    </a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link"
+                        href="./crearEvento.html">
+                        Crear Eventos
+                    </a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link"
+                        href="guia.html">
+                        Centro de ayuda
+                    </a>
+                </li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link"
+                        href="nosotros.html">
+                        Nosotros
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button class="btn btn-link"
+                        id="darkModeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Crear Evento</h1>
+    
+    <!-- Formulario para crear eventos -->
+    <form>
+        <label for="nombre">Nombre del Evento:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="fecha">Fecha del Evento:</label>
+        <input type="date" id="fecha" name="fecha" required><br><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required><br><br>
+
+        <label for="tipo">Tipo de Evento:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="concierto">Concierto</option>
+            <option value="feria">Feria</option>
+            <option value="conferencia">Conferencia</option>
+            <!-- Agrega más opciones según sea necesario -->
+        </select><br><br>
+
+        <label for="ubicacion">Ubicación:</label>
+        <!-- Campo de texto para ingresar la ubicación -->
+        <input type="text" id="ubicacion" name="ubicacion" required>
+        
+        <!-- Botón para abrir el mapa de Google Maps -->
+        <button type="button" id="mostrar-mapa">Seleccionar Ubicación en Mapa</button><br><br>
+
+        <!-- Contenedor para mostrar el mapa de Google Maps -->        
+        <div id="map-container" style="width: 100%; height: 300px; display: none;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7599842370427!2d-66.157662107377!3d-17.383478628725154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sUbicaci%C3%B3n%20Espec%C3%ADfica!5e0!3m2!1sen!2sus!4v1631348058000!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+        <!-- Campos ocultos para almacenar las coordenadas de la ubicación seleccionada -->
+        <input type="hidden" id="latitud" name="latitud">
+        <input type="hidden" id="longitud" name="longitud">
+
+        <input type="submit" value="Crear Evento">
+    </form>
+    <script src="script.js"></script>
+    <!-- Script para mostrar el mapa y seleccionar una ubicación -->
+    <script>
+        let map;
+        let marker;
+
+        document.getElementById("mostrar-mapa").addEventListener("click", function() {
+            document.getElementById("map-container").style.display = "block";
+            initMap();
+        });
+
+        function initMap() {
+            const cochabamba = { lat: -17.393188, lng: -66.157179 }; // Coordenadas de Cochabamba
+            map = new google.maps.Map(document.getElementById("map-container"), {
+                center: cochabamba,
+                zoom: 15
+            });
+
+            // Crear un campo de búsqueda de lugares en Google Maps
+            const input = document.getElementById("ubicacion");
+            const searchBox = new google.maps.places.SearchBox(input);
+
+            // Escuchar cuando se selecciona un lugar desde el campo de búsqueda
+            searchBox.addListener("places_changed", function() {
+                const places = searchBox.getPlaces();
+
+                if (places.length === 0) {
+                    return;
+                }
+
+                // Obtener la primera ubicación y establecer el mapa en esa ubicación
+                const place = places[0];
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(15);
+                }
+
+                // Eliminar el marcador existente (si existe)
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                // Crear un nuevo marcador en la ubicación seleccionada
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location,
+                    draggable: true // Permite mover el marcador
+                });
+
+                // Escuchar el evento de arrastre del marcador para actualizar las coordenadas
+                google.maps.event.addListener(marker, "dragend", function(event) {
+                    document.getElementById("latitud").value = event.latLng.lat();
+                    document.getElementById("longitud").value = event.latLng.lng();
+                });
+
+                // Actualizar las coordenadas en los campos ocultos
+                document.getElementById("latitud").value = place.geometry.location.lat();
+                document.getElementById("longitud").value = place.geometry.location.lng();
+            });
+        }
+    </script>
+</body>
+</html>

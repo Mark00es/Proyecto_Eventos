@@ -3,6 +3,7 @@ function toggleDarkMode() {
     const navbars = document.querySelectorAll('.navbar');
     const darkModeToggle = document.getElementById('darkModeToggle');
     const cambiarColorElements = document.querySelectorAll('.cambiarcolor');
+    const listGroupItems = document.querySelectorAll('.list-group-item'); // Elementos li
 
     // Cambia la clase 'dark-mode' en todos los elementos con la clase 'navbar'
     navbars.forEach(cambiarcolor => {
@@ -16,11 +17,17 @@ function toggleDarkMode() {
         cambiarColorElements.forEach(element => {
             element.classList.add('dark-mode');
         });
+        listGroupItems.forEach(item => {
+            item.classList.add('dark-list-bg'); // Agrega una clase para el color de fondo en modo oscuro
+        });
     } else {
         // Modo claro
         darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         cambiarColorElements.forEach(element => {
             element.classList.remove('dark-mode');
+        });
+        listGroupItems.forEach(item => {
+            item.classList.remove('dark-list-bg'); // Remueve la clase para el color de fondo en modo claro
         });
     }
 

@@ -13,9 +13,12 @@
     scale: 1.5;
 }
 .navbar {
-    background: linear-gradient(45deg, #0593eb, #8dc8ec);
+    background: linear-gradient(45deg, #4db2dd, #2cc3d18f);
     background-size: 200% 100%;
     animation: gradientAnimation 7s linear infinite alternate;
+}
+.card{
+    background: #4db2dd;
 }
 
 /* Estilo para la barra de navegación en modo oscuro */
@@ -23,6 +26,11 @@
 .navbar.dark-mode #darkModeToggle {
     color: white;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
+
 /* Animación para el fondo en modo oscuro */
 @keyframes darkGradientAnimation {
     0% {
@@ -35,11 +43,14 @@
 
 /* Estilo para la barra de navegación en modo oscuro */
 .navbar.dark-mode {
-    background: linear-gradient(45deg, #000000, #00008B);
+    background: linear-gradient(45deg, #4D6DE3, #00008B);
     background-size: 200% 100%;
     animation: darkGradientAnimation 7s linear infinite alternate;
 }
-
+.dark-list-bg {
+    background-color: #4D6DE3; /* Cambia el color de fondo en modo oscuro */
+    color: white; /* Cambia el color del texto en modo oscuro */
+}
 #darkModeToggle {
     color: white; /* Color blanco predeterminado */
     transition: color 0.3s ease-in-out;
@@ -114,7 +125,15 @@ label {
 .card .btn-primary:hover {
     background-color: #040e9b; /* Cambia el color al hacer hover */
 }
-
+.card2{
+    background-color: white;
+    border: 2px solid black;
+    margin-top: 12px;
+    border-radius: 0.5rem;
+}
+.card-body{
+    color: white;
+}
 /* Estilo para agrandar la imagen al hacer hover */
 .card .card-img-top:hover {
     transform: scale(1.1); /* Aumenta el tamaño al hacer hover */

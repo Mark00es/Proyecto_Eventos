@@ -1,240 +1,552 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eventos Cochabamba</title>
-    <!-- Agregar el enlace a Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
-    <link rel="stylesheet" href="stylesHome.css"> <!-- Archivo CSS personalizado -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">    
-    <link rel="icon" href="./assets/logo.avif">
-    <style>
-        /* Estilos del chatbot */
-#chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0">
+		<title>Eventos Cochabamba</title>
+		<!-- Agregar el enlace a Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="stylesHome.css">
+		<!-- Archivo CSS personalizado -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+		<link rel="icon" href="./assets/logo.avif">
+		<style>        
+			#chatbot-container {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				width: 300px;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				border-radius: 5px;
+				z-index: 9999; /* Valor alto para que esté encima de todo */
+			}
 
-#chatbot-icon {
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer;
-}
+			#chatbot-icon {
+				background-color: #007bff;
+				color: #fff;
+				text-align: center;
+				padding: 10px;
+				cursor: pointer;
+			}
 
-#chatbot-window {
-    display: none;
-    max-height: 300px;
-    overflow-y: auto;
-}
+			#chatbot-window {
+				display: none;
+				max-height: 300px;
+				overflow-y: auto;
+			}
 
-#chatbot-header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+			#chatbot-header {
+				background-color: #007bff;
+				color: #fff;
+				padding: 5px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
 
-#close-chatbot {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-}
+			#close-chatbot {
+				background: none;
+				border: none;
+				color: #fff;
+				cursor: pointer;
+			}
 
-#chatbot-messages {
-    padding: 10px;
-}
+			#chatbot-messages {
+				padding: 10px;
+			}
 
-#chatbot-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-}
+			#chatbot-input {
+				display: flex;
+				padding: 10px;
+				border-top: 1px solid #ccc;
+			}
 
-#user-message {
-    flex: 1;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 5px;
-}
+			#user-message {
+				flex: 1;
+				padding: 5px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				margin-right: 5px;
+			}
 
-#send-message {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+			#send-message {
+				background-color: #007bff;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.list-group-item {
+				margin-bottom: 15px;
+			}
+			/* Estilos personalizados para los colores de las fechas */
+			.red-text {
+					color: red;
+				}
 
-    </style>
-</head>
-<body>
+				.green-text {
+					color: green;
+				}
+				.yellow-text{
+					color:orange;
+				}
+				.yellow-star{
+					color: yellow;
+				}
+			a{
+				text-decoration: none;
+				color:black;
+			}
+			a:hover{
+				scale: 1.5;
+			}    
+			.list-group-item:hover {
+				background-color: #4db2dd; /* Cambia el color de fondo en hover */
+				cursor: pointer; /* Cambia el cursor a una mano en hover */
+			}
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.html" style="font-family: 'Poppins', sans-serif; color: white;"><img src="./assets/logo.avif" alt="" width="50px" height="50px" style="margin-left: 3rem;"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item mx-5">
-                <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item mx-5">
-                <a class="nav-link" href="eventos.html">Eventos</a>
-            </li>
-            <li class="nav-item mx-5">
-                <a class="nav-link" href="guia.html">Guia</a>
-            </li>
-            <li class="nav-item mx-5">
-                <a class="nav-link" href="nosotros.html">Nosotros</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">            
-            <li class="nav-item">
-                <button class="btn btn-link" id="darkModeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </li>
-        </ul>
-    </div>
-</nav>
+			.list-group-item:hover a {
+				color: white; /* Cambia el color del texto en hover */
+				font-size: large;
+			}
+			</style>
+	</head>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+			<a class="navbar-brand"
+				href="index.html"
+				style="font-family: 'Poppins', sans-serif; color: white;">
+				<img src="./assets/logo.avif"
+					alt
+					width="50px"
+					height="50px"
+					style="margin-left: 3rem;">
+			</a>
+			<button class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-between"
+				id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item mx-5">
+						<a class="nav-link"
+							href="eventos.html">
+							Encuentra Eventos
+						</a>
+					</li>
+					<li class="nav-item mx-5">
+						<a class="nav-link"
+							href="./crearEvento.html">
+							Crear Eventos
+						</a>
+					</li>
+					<li class="nav-item mx-5">
+						<a class="nav-link"
+							href="guia.html">
+							Centro de ayuda
+						</a>
+					</li>
+					<li class="nav-item mx-5">
+						<a class="nav-link"
+							href="nosotros.html">
+							Nosotros
+						</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<button class="btn btn-link"
+							id="darkModeToggle">
+							<i class="fas fa-moon"></i>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container mt-5">
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<h2>
+						Bienvenido a los eventos y ferias de Cochabamba
+					</h2>
+					<p>
+						Texto de bienvenida u otra información relevante.
+					</p>
+				</div>
+				<div class="col-md-6">
+					<!-- <img src="ruta_de_la_imagen.jpg" alt="Imagen de bienvenida" class="img-fluid"> -->
+					<div id="slider-container"
+						class="container-fluid">
+						<div id="slider"
+							class="carousel slide"
+							data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<div class="row">
+										<div class="col">
+											<img src="./assets/img1.jpg"
+												alt="Imagen 1"
+												class="slide-image w-100"
+												style=" height: 300px;">
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col">
+											<img src="./assets/img2.jpg"
+												alt="Imagen 2"
+												class="slide-image w-100"
+												style="height: 300px;">
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col">
+											<img src="./assets/img3.jpg"
+												alt="Imagen 3"
+												class="slide-image w-100"
+												style="height: 300px;">
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col">
+											<img src="./assets/img4.jpeg"
+												alt="Imagen 4"
+												class="slide-image w-100"
+												style="height: 300px;">
+										</div>
+									</div>
+								</div>
+								<div class="carousel-item">
+									<div class="row">
+										<div class="col">
+											<img src="./assets/img5.jpg"
+												alt="Imagen 5"
+												class="slide-image w-100"
+												style="height: 300px;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-<!-- Carrusel de Imágenes -->
-<div id="slider-container" class="container-fluid">
-    <div id="slider" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row">
-                    <div class="col">
-                        <img src="./assets/img1.jpg" alt="Imagen 1" class="slide-image w-100" style=" height: 250px;">
-                    </div>
-                    <div class="col">
-                        <img src="./assets/img2.jpg" alt="Imagen 2" class="slide-image w-100" style="height: 250px;">
-                    </div>
-                    <div class="col">
-                        <img src="./assets/img3.jpg" alt="Imagen 3" class="slide-image w-100" style="height: 250px;">
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    <div class="col">
-                        <img src="./assets/img4.jpeg" alt="Imagen 4" class="slide-image w-100" style="height: 250px;">
-                    </div>
-                    <div class="col">
-                        <img src="./assets/img5.jpg" alt="Imagen 5" class="slide-image w-100" style="height: 250px;">
-                    </div>
-                    <div class="col">
-                        <img src="./assets/img6.jpg" alt="Imagen 6" class="slide-image w-100" style="height: 250px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Sección de Eventos -->
-<div class="container mt-5">
-    <h2>Tus Eventos</h2>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a href="card.html?evento=1&imagen=./assets/img1.jpg&fecha=2023-09-10&zona=Centro&precio=30">Evento 1</a>
-        </li>
-        <li class="list-group-item">
-            <a href="card.html?evento=2&imagen=./assets/img2.jpg&fecha=2023-09-10&zona=Centro&precio=20">Evento 2</a>
-        </li>
-        <li class="list-group-item">
-            <a href="card.html?evento=1&imagen=./assets/img3.jpg&fecha=2023-09-10&zona=Centro&precio=30">Evento 3</a>
-        </li>
-    </ul>
-</div>
-<!-- Chatbot -->
-<div id="chatbot-container">
-    <div id="chatbot-icon">
-        <i class="fas fa-comment"></i>
-    </div>
-    <div id="chatbot-window">
-        <div id="chatbot-header">
-            <span>Chatbot</span>
-            <button id="close-chatbot">X</button>
-        </div>
-        <div id="chatbot-messages">
-            <p>En que podemos ayudarte</p>
-            <!-- Aquí se mostrarán los mensajes del chatbot -->
-        </div>
-        <div id="chatbot-input">
-            <input type="text" id="user-message" placeholder="Escribe un mensaje...">
-            <button id="send-message">Enviar</button>
-        </div>
-    </div>
-</div>
 
 
-<!-- Scripts de Bootstrap y otros scripts (copiar el código de los scripts del archivo original) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="script.js"></script>
-<script>
-    const slider = document.getElementById("slider");
-    const slides = document.querySelectorAll(".carousel-item");
-    let counter = 0;
 
-    function moveSlider() {
-        slides[counter].classList.remove("active");
-        counter++;
-        if (counter >= slides.length) {
-            counter = 0;
-        }
-        slides[counter].classList.add("active");
-    }
+				</div>
+			</div>
+		</div>
+		<!-- Sección de Eventos -->
+		<div class="container mt-5">
+			<div class="container mt-2">
+				<div class="row">
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=salon">
+								<img src="./assets/img1.jpg"
+									alt="Imagen 1"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Salon</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=anime">
+								<img src="./assets/img2.jpg"
+									alt="Imagen 2"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Anime</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=ferias">
+								<img src="./assets/img3.jpg"
+									alt="Imagen 3"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Ferias</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=concierto">
+								<img src="./assets/img1.jpg"
+									alt="Imagen 1"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Conciertos</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=conferencia">
+								<img src="./assets/img2.jpg"
+									alt="Imagen 2"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Conferencia</p>
+							</a>
+						</div>
+					</div>
+					<div class="col-2 text-center">
+						<div class="rounded-circle-container d-flex flex-column align-items-center">
+							<a href="eventos.html?typeFilter=estudios">
+								<img src="./assets/img3.jpg"
+									alt="Imagen 3"
+									class="rounded-circle"
+									width="100"
+									height="100">
+								<p>Estudios</p>
+							</a>
+						</div>
+					</div>
+					<!-- Agrega más imágenes y columnas dentro de la fila según sea necesario -->
+				</div>
+			</div>
+		</div>
+		<div class="container mt-5">
+			<div class="container mt-2">
+				<div class="row">
+					<div class="col-4">
+						<h2>Tus Eventos</h2>
+						<ul class="list-group"
+							id="eventList">
+						</ul>
+					</div>
+					<div class="col-4">
+						<h2>Destacados</h2>
+						<ul class="list-group"
+							id="destacadosList">
+						</ul>
+					</div>
+					<div class="col-4 text-center">
+						<h2>Transporte</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="chatbot-container">
+			<div id="chatbot-icon">
+				<i class="fas fa-comment"></i>
+			</div>
+			<div id="chatbot-window">
+				<div id="chatbot-header">
+					<span>Chatbot</span>
+					<button id="close-chatbot">X</button>
+				</div>
+				<div id="chatbot-messages">
+					<p>
+						En que podemos ayudarte
+					</p>
+					<!-- Aquí se mostrarán los mensajes del chatbot -->
+				</div>
+				<div id="chatbot-input">
+					<input type="text"
+						id="user-message"
+						placeholder="Escribe un mensaje...">
+					<button id="send-message">Enviar</button>
+				</div>
+			</div>
+		</div>
+		<footer class="navbar text-white text-center py-3">
+			<div class="container">
+				<p>
+					&copy; 2023 Tu Empresa. Todos los derechos reservados.
+				</p>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="script.js"></script>
+		<script>
+			const slider = document.getElementById("slider");
+			const slides = document.querySelectorAll(".carousel-item");
+			let counter = 0;
 
-    setInterval(moveSlider, 5000); // Cambia de imagen cada 5 segundos
-</script>
-<script>
-    // Mostrar u ocultar el chatbot al hacer clic en el icono
-document.getElementById("chatbot-icon").addEventListener("click", function() {
-    document.getElementById("chatbot-window").style.display = "block";
-});
+			function moveSlider() {
+				slides[counter].classList.remove("active");
+				counter++;
+				if (counter >= slides.length) {
+					counter = 0;
+				}
+				slides[counter].classList.add("active");
+			}
 
-document.getElementById("close-chatbot").addEventListener("click", function() {
-    document.getElementById("chatbot-window").style.display = "none";
-});
+			setInterval(moveSlider, 3000); // Cambia de imagen cada 5 segundos
+		</script>
+		<script>
+			// Mostrar u ocultar el chatbot al hacer clic en el icono
+			document.getElementById("chatbot-icon").addEventListener("click", function() {
+				document.getElementById("chatbot-window").style.display = "block";
+			});
 
-// Enviar un mensaje del usuario al chatbot
-document.getElementById("send-message").addEventListener("click", function() {
-    const userMessage = document.getElementById("user-message").value;
-    const chatbotMessages = document.getElementById("chatbot-messages");
+			document.getElementById("close-chatbot").addEventListener("click", function() {
+				document.getElementById("chatbot-window").style.display = "none";
+			});
 
-    // Crear un nuevo mensaje del usuario
-    const userMessageElement = document.createElement("div");
-    userMessageElement.className = "user-message";
-    userMessageElement.textContent = userMessage;
+			// Enviar un mensaje del usuario al chatbot
+			document.getElementById("send-message").addEventListener("click", function() {
+				const userMessage = document.getElementById("user-message").value;
+				const chatbotMessages = document.getElementById("chatbot-messages");
 
-    // Agregar el mensaje del usuario al chatbot
-    chatbotMessages.appendChild(userMessageElement);
+				// Crear un nuevo mensaje del usuario
+				const userMessageElement = document.createElement("div");
+				userMessageElement.className = "user-message";
+				userMessageElement.textContent = userMessage;
 
-    // Lógica del chatbot: aquí puedes implementar la lógica de respuesta del chatbot
+				// Agregar el mensaje del usuario al chatbot
+				chatbotMessages.appendChild(userMessageElement);
 
-    // Limpiar el campo de entrada del usuario
-    document.getElementById("user-message").value = "";
-});
+				// Lógica del chatbot: aquí puedes implementar la lógica de respuesta del chatbot
 
-</script>
-</body>
+				// Limpiar el campo de entrada del usuario
+				document.getElementById("user-message").value = "";
+			});		
+			const eventos = [
+				{ id: 1, nombre: '1 semana', fecha: calcularFecha(7) },
+				{ id: 2, nombre: '1 mes', fecha: calcularFecha(30) },
+				{ id: 3, nombre: '1 año', fecha: calcularFecha(365) },
+			];
+
+			// Obtener la fecha actual en JavaScript
+			const fechaActual = new Date();
+
+			// Función para calcular la diferencia en días entre dos fechas
+			function calcularDiferenciaDias(fechaEvento) {
+				const diferenciaDias = Math.ceil((fechaEvento - fechaActual) / (1000 * 60 * 60 * 24));
+				return diferenciaDias;
+			}
+
+			function calcularFecha(dias) {
+				const fechaActual = new Date();
+				fechaActual.setDate(fechaActual.getDate() + dias);
+				const fechaFormateada = fechaActual.toISOString().split('T')[0];
+				return fechaFormateada;
+			}
+			
+			// Función para configurar el color y el icono según la diferencia de días
+			function configurarColorYIcono(diferenciaDias, fechaEventoElement, reminderIconElement) {
+				if (diferenciaDias < 0) {
+					fechaEventoElement.classList.add('red-text'); // Fecha pasada, color rojo
+				} else if (diferenciaDias < 3) {
+					fechaEventoElement.classList.add('yellow-text'); // Menos de 3 días, color amarillo
+					reminderIconElement.style.display = 'inline'; // Mostrar el icono de recordatorio
+				} else {
+					fechaEventoElement.classList.add('green-text'); // Más de 3 días, color verde
+				}
+			}
+
+			// Obtener el elemento HTML de la lista de eventos
+			const eventListElement = document.getElementById('eventList');
+
+			// Generar dinámicamente la lista de eventos
+			eventos.forEach(evento => {
+				const liElement = document.createElement('li');
+				liElement.className = 'list-group-item';
+
+				const aElement = document.createElement('a');
+				aElement.href = `card.html?evento=${evento.nombre}&imagen=./assets/img${evento.id}.jpg&fecha=${evento.fecha}&zona=Centro&precio=10`;
+				aElement.textContent = evento.nombre;
+
+				const pElement = document.createElement('p');
+				pElement.className = 'margin-right';
+
+				const fechaEvento = new Date(evento.fecha);
+				const diferenciaDias = calcularDiferenciaDias(fechaEvento);
+
+				const fechaEventoElement = document.createElement('span');
+				fechaEventoElement.textContent = `${evento.fecha}`;
+				const reminderIconElement = document.createElement('i');
+				pElement.appendChild(fechaEventoElement);
+				pElement.appendChild(reminderIconElement);
+
+				configurarColorYIcono(diferenciaDias, fechaEventoElement, reminderIconElement);
+
+				liElement.appendChild(aElement);
+				liElement.appendChild(pElement);
+
+				eventListElement.appendChild(liElement);
+			});
+			// Generar dinámicamente la lista de eventos destacados
+			const eventosDestacados = [
+				{ id: 1, nombre: 'Feria de Anticucho', fecha: '2023-09-21', estrellas: 3 },
+				{ id: 2, nombre: 'Evento 2', fecha: '2023-09-15', estrellas: 4 },
+				{ id: 3, nombre: 'Evento 3', fecha: '2023-09-16', estrellas: 5 },
+				// Agrega más eventos destacados según sea necesario
+			];
+			// Obtén el elemento HTML de la lista de eventos destacados
+			const destacadosListElement = document.getElementById('destacadosList');
+
+			// Genera dinámicamente la lista de eventos destacados
+			for (const evento of eventosDestacados) {
+				const liElement = document.createElement('li');
+				liElement.className = 'list-group-item';
+
+				const aElement = document.createElement('a');
+				aElement.href = `card.html?evento=${evento.nombre}&imagen=./assets/img${evento.id}.jpg&fecha=${evento.fecha}&zona=Centro&precio=15`;
+
+				// Agrega la cantidad de estrellas en función del valor en el JSON
+				const starsElement = document.createElement('span');
+				starsElement.className = 'stars';
+
+				for (let i = 0; i < evento.estrellas; i++) {
+					const starIcon = document.createElement('i');
+					starIcon.className = 'fas fa-star yellow-star';
+					starsElement.appendChild(starIcon);
+				}
+
+				aElement.appendChild(starsElement);
+				aElement.innerHTML += ` ${evento.nombre}`;
+
+				const pElement = document.createElement('p');
+				pElement.className = 'margin-right';
+
+				const fechaEvento = new Date(evento.fecha);
+				const diferenciaDias = calcularDiferenciaDias(fechaEvento);
+
+				const fechaEventoElement = document.createElement('span');
+				fechaEventoElement.textContent = `${evento.fecha}`;
+				const reminderIconElement = document.createElement('i');
+				pElement.appendChild(fechaEventoElement);
+				pElement.appendChild(reminderIconElement);
+
+				configurarColorYIcono(diferenciaDias, fechaEventoElement, reminderIconElement);
+
+				liElement.appendChild(aElement);
+				liElement.appendChild(pElement);
+
+				destacadosListElement.appendChild(liElement);
+			}
+		</script>
+	</body>
 </html>
